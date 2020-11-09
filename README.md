@@ -4,4 +4,6 @@ The player controls a boxer and can send out each arm individually like a snake,
 
 Thanks to @Elastiskalinjen for showing me PICO-8 and providing me with the nice camera shake and particle effect function.
 
-[demo]: https://i.imgur.com/g64O41h.gif "demo"
+Play it here: https://www.lexaloffle.com/bbs/?pid=57313
+
+![alt text](https://i.imgur.com/g64O41h.gif "demo")
