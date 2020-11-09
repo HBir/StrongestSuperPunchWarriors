@@ -43,7 +43,7 @@ function initplayer(id,x,y,rad,col, rcol, lcol)
   p.knockbackspeed = 0
   p.knockbackdir = 0
   p.arms = {initarm(x,y,rcol,(id-1)*0.5+0.5), initarm(x,y,lcol,(id-1)*0.5+0.5)}
-  
+
   add(players, p)
 end
 
@@ -79,11 +79,11 @@ function go_to_intro()
 end
 
 function push(list,v)
-	local k=#list
-	for i=k,1,-1 do
-		list[i+1]=list[i]
-	end
-	list[1]=v
+  local k=#list
+  for i=k,1,-1 do
+    list[i+1]=list[i]
+  end
+  list[1]=v
 end
 
 -- camershake
@@ -92,22 +92,22 @@ shake=0
 function camerashake()
   local shakex=16-rnd(32)
   local shakey=16-rnd(32)
- 
-	shakex*=shake
-	shakey*=shake
 
-	camera(shakex,shakey)
-	shake=shake*0.95
-	if(shake < 0.02)shake=0
+  shakex*=shake
+  shakey*=shake
+
+  camera(shakex,shakey)
+  shake=shake*0.95
+  if(shake < 0.02)shake=0
 end
 -----
 
 function addtotrail(a)
-	local t={}
-	t.x = a.x
-	t.y = a.y
+  local t={}
+  t.x = a.x
+  t.y = a.y
   t.rad = 1
-	push(a.trail,t)
+  push(a.trail,t)
 end
 
 function reset_arm(arm)
@@ -137,18 +137,18 @@ function check_bounds(p)
 end
 
 function distance(a,b)
-	return sqrt(((b.x-a.x)/10)^2+((b.y-a.y)/10)^2)*10
+  return sqrt(((b.x-a.x)/10)^2+((b.y-a.y)/10)^2)*10
 end
 
 function circcoll(a,b)
   if (not a.x or not a.y or not b.x or not b.y) then
     return false
   end
-	if distance(a,b) < a.rad+b.rad then 
-		return true 
-	else 
-		return false 
-	end
+  if distance(a,b) < a.rad+b.rad then
+    return true
+  else
+    return false
+  end
 end
 
 function set_winner(p)
@@ -214,38 +214,38 @@ end
 -- credit to @elastiskalinjen
 particles={}
 function initparticle(x,y,rad,col,dx,dy)
-	local p={}
-	p.x=x
-	p.y=y
-	p.dx=dx
-	p.dy=dy
-	-- default parameters
-	if(dx == 0)p.dx = rnd(2)-1
-	if(dy == 0)p.dy = rnd(2)-1
-	p.rad=rad
-	p.col=col
-	
-	add(particles,p)
+  local p={}
+  p.x=x
+  p.y=y
+  p.dx=dx
+  p.dy=dy
+  -- default parameters
+  if(dx == 0)p.dx = rnd(2)-1
+  if(dy == 0)p.dy = rnd(2)-1
+  p.rad=rad
+  p.col=col
+
+  add(particles,p)
 end
 
 function updateparticle(p)
-	p.dx*=0.9
-	p.dy*=0.9
- 	p.x+=p.dx
- 	p.y+=p.dy
- 	
- 	if p.rad > 10 then
- 		p.rad -= 0.75
- 	else 
-		p.rad -= 0.09
-	end
-	if p.rad <=0 then 
-		del(particles,p)
-	end
+  p.dx*=0.9
+  p.dy*=0.9
+   p.x+=p.dx
+   p.y+=p.dy
+
+   if p.rad > 10 then
+     p.rad -= 0.75
+   else
+    p.rad -= 0.09
+  end
+  if p.rad <=0 then
+    del(particles,p)
+  end
 end
 
 function drawparticle(p)
-	circfill(p.x,p.y,p.rad,p.col)
+  circfill(p.x,p.y,p.rad,p.col)
 end
 --------
 
@@ -289,7 +289,7 @@ function updatearm(arm)
       arm.x = arm.trail[1].x
       arm.y = arm.trail[1].y
     end
-    
+
     if (#arm.trail <= 0) then
       arm.state=0
       arm.x = nil
@@ -335,7 +335,7 @@ function updateplayer(p)
         add(newdir, 0)
       end
     end
-    
+
     if (#newdir > 0) then
       local newdirsum=0
       for i=1, #newdir do
@@ -353,7 +353,7 @@ function updateplayer(p)
   else
     -------------- arm active --------------
     local steeringf = 0.015
-    if (btn(0,cntrl_id)) then 
+    if (btn(0,cntrl_id)) then
       p.arms[1].dir-=steeringf
       p.arms[2].dir-=steeringf
     end
@@ -378,8 +378,8 @@ function updateplayer(p)
     function arm_trail_collision(arm, p)
       for i=0,#arm.trail do
         if (arm.trail[i]) then
-          if (circcoll(p.arms[1], arm.trail[i]) 
-            or circcoll(p.arms[2], arm.trail[i]) 
+          if (circcoll(p.arms[1], arm.trail[i])
+            or circcoll(p.arms[2], arm.trail[i])
           ) then
             reset_all_arms(p)
             -- if clash, reset both players arm --
@@ -400,7 +400,7 @@ function updateplayer(p)
   local armspawndist = p.rad+2
   local dist = 4
 
-  if (btnp(4, cntrl_id)) then    
+  if (btnp(4, cntrl_id)) then
     toggle_arm(p.arms[2], p, 0.15, dist)
   end
 
@@ -502,7 +502,7 @@ function drawplayer(p)
     draw_eye(p, p.arms[1].dir, shift-0.07, 3, temphover)
     draw_eye(p, p.arms[1].dir, -shift+0.07, 3, temphover)
   end
-  
+
   -- arms
   function draw_arm(arm, pl, s)
     if (arm.state >= 1) then
@@ -558,7 +558,7 @@ function drawui()
   else
     print(score[2], 116 ,118, players[2].col)
   end
-  
+
   if (countdown>0) then
     if (countdown>2) then
       local offset = abs(((sin(frame/80))^-1)*5)*-1
